@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Shoe {
+  id         Int          @id @default(autoincrement())
+  brand      String
+  name       String
+  style      Style        @default(sneaker)
+  shoePerson ShoePerson[]
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+}
+
+model ShoePerson {
+  shoeId    Int
+  personId  Int
+  size      Int
+  fitRating Int
+  shoe      Shoe     @relation(fields: [shoeId], references: [id], onDelete: Cascade)
+  person    Person   @relation(fields: [personId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([shoeId, personId])
+}
+
+model Person {
+  id         Int          @id @default(autoincrement())
+  name       String
+  email      String
+  password   String
+  foot       Foot?
+  shoePerson ShoePerson[]
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+}
+
+model Foot {
+  id         Int          @id @default(autoincrement())
+  personId   Int          @unique
+  length     Int
+  width      Int
+  arch       Option
+  volume     Option
+  person     Person   @relation(fields: [personId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+enum Option {
+  low
+  med
+  high
+}
+
+enum Style {
+  boot
+  sandal
+  sneaker
+  casual
+  formal
+}
