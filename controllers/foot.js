@@ -1,3 +1,6 @@
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
+
 const createFoot = async (req, res) => {
     try {
       await prisma.foot.create({

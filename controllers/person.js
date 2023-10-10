@@ -1,3 +1,6 @@
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
+
 const createPerson = async (req, res) => {
     try {
       await prisma.person.create({
