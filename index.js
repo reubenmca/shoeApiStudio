@@ -8,11 +8,13 @@ import footRoutes from './routes/person.js';
 import shoePersonRoutes from './routes/shoePerson.js';
 import shoeRoutes from './routes/shoe.js';
 
+import cors from 'cors';
 
 // Create an Express application
 const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cors());
 
 // Use the routes module
 app.use('/', indexRoutes);
