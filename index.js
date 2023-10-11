@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(cors());
 
 // Use the routes module
-app.use('/api', indexRoutes);
+app.use('/', indexRoutes);
 app.use("/api/persons", personRoutes);
 app.use("/api/foots", footRoutes);
 app.use("/api/shoePersons", shoePersonRoutes);
