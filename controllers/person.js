@@ -12,7 +12,7 @@ const createPerson = async (req, res) => {
       return res.status(201).json({
         status: 201,
         msg: "Person successfully created",
-        // data: newPersons,
+        data: data,
       });
     } catch (err) {
       return res.status(500).json({
