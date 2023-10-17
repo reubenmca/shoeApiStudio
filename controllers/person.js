@@ -10,7 +10,6 @@ const createPerson = async (req, res) => {
       const newPersons = await prisma.person.findMany();
   
       return res.status(201).json({
-        status: 201,
         msg: "Person successfully created",
         // data: newPersons,
       });
